@@ -1,0 +1,224 @@
+<style>
+    body {
+        background: red;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FWI Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: white;
+            border-radius: 12px;
+            padding: 35px 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 25px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 7px;
+        }
+
+        .input-group input {
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #333;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .button-area {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        .predict-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .predict-btn:hover {
+            background: #444;
+        }
+
+        .result {
+            margin-top: 28px;
+            padding: 18px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .result p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .result h2 {
+            color: #222;
+            font-size: 26px;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>FWI Prediction</h1>
+            <p>Enter the environmental parameters to predict the Fire Weather Index.</p>
+        </div>
+
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Temperature</label>
+                    <input type="text" name="Temperature" placeholder="Enter temperature" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Relative Humidity (RH)</label>
+                    <input type="text" name="RH" placeholder="Enter RH" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Wind Speed (Ws)</label>
+                    <input type="text" name="Ws" placeholder="Enter wind speed" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Rain</label>
+                    <input type="text" name="Rain" placeholder="Enter rainfall" required>
+                </div>
+
+                <div class="input-group">
+                    <label>FFMC</label>
+                    <input type="text" name="FFMC" placeholder="Enter FFMC" required>
+                </div>
+
+                <div class="input-group">
+                    <label>DMC</label>
+                    <input type="text" name="DMC" placeholder="Enter DMC" required>
+                </div>
+
+                <div class="input-group">
+                    <label>ISI</label>
+                    <input type="text" name="ISI" placeholder="Enter ISI" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Classes</label>
+                    <input type="text" name="Classes" placeholder="Enter class value" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Region</label>
+                    <input type="text" name="Region" placeholder="Enter region value" required>
+                </div>
+
+            </div>
+
+            <div class="button-area">
+                <button type="submit" class="predict-btn">
+                    Predict FWI
+                </button>
+            </div>
+
+        </form>
+
+        <div class="result">
+            <p>Predicted Fire Weather Index</p>
+            <h2>{{ results }}</h2>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
