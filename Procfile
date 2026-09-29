@@ -1,0 +1,1 @@
+web: gunicorn --chdir "Forest_Fire_Prediction" application:application
