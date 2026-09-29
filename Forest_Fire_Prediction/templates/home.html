@@ -1,8 +1,3 @@
-<style>
-    body {
-        background: red;
-    }
-</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -149,8 +144,10 @@
     <div class="container">
 
         <div class="header">
-            <h1>FWI Prediction</h1>
-            <p>Enter the environmental parameters to predict the Fire Weather Index.</p>
+            <h1>Fire Weather Index Prediction</h1>
+            <p>
+                Enter the environmental parameters to predict the Fire Weather Index.
+            </p>
         </div>
 
         <form action="{{ url_for('predict_datapoint') }}" method="post">
@@ -159,47 +156,83 @@
 
                 <div class="input-group">
                     <label>Temperature</label>
-                    <input type="text" name="Temperature" placeholder="Enter temperature" required>
+                    <input
+                        type="text"
+                        name="Temperature"
+                        placeholder="Enter temperature"
+                        required>
                 </div>
 
                 <div class="input-group">
                     <label>Relative Humidity (RH)</label>
-                    <input type="text" name="RH" placeholder="Enter RH" required>
+                    <input
+                        type="text"
+                        name="RH"
+                        placeholder="Enter relative humidity"
+                        required>
                 </div>
 
                 <div class="input-group">
                     <label>Wind Speed (Ws)</label>
-                    <input type="text" name="Ws" placeholder="Enter wind speed" required>
+                    <input
+                        type="text"
+                        name="Ws"
+                        placeholder="Enter wind speed"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>Rain</label>
-                    <input type="text" name="Rain" placeholder="Enter rainfall" required>
+                    <label>Rainfall</label>
+                    <input
+                        type="text"
+                        name="Rain"
+                        placeholder="Enter rainfall"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>FFMC</label>
-                    <input type="text" name="FFMC" placeholder="Enter FFMC" required>
+                    <label>Fine Fuel Moisture Code (FFMC)</label>
+                    <input
+                        type="text"
+                        name="FFMC"
+                        placeholder="Enter FFMC value"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>DMC</label>
-                    <input type="text" name="DMC" placeholder="Enter DMC" required>
+                    <label>Duff Moisture Code (DMC)</label>
+                    <input
+                        type="text"
+                        name="DMC"
+                        placeholder="Enter DMC value"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>ISI</label>
-                    <input type="text" name="ISI" placeholder="Enter ISI" required>
+                    <label>Initial Spread Index (ISI)</label>
+                    <input
+                        type="text"
+                        name="ISI"
+                        placeholder="Enter ISI value"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>Classes</label>
-                    <input type="text" name="Classes" placeholder="Enter class value" required>
+                    <label>Fire Class (Encoded)</label>
+                    <input
+                        type="text"
+                        name="Classes"
+                        placeholder="Enter encoded class value"
+                        required>
                 </div>
 
                 <div class="input-group">
-                    <label>Region</label>
-                    <input type="text" name="Region" placeholder="Enter region value" required>
+                    <label>Region (Encoded)</label>
+                    <input
+                        type="text"
+                        name="Region"
+                        placeholder="Enter region value"
+                        required>
                 </div>
 
             </div>
@@ -214,7 +247,7 @@
 
         <div class="result">
             <p>Predicted Fire Weather Index</p>
-            <h2>{{ results }}</h2>
+            <h2>{{ results if results is defined else '—' }}</h2>
         </div>
 
     </div>
